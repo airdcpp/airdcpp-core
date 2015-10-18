@@ -1,1 +1,0 @@
-;@INSERT_TRANSLATIONS@ ; Because we only need the strings this dummy file is needed.
