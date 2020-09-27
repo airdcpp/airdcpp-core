@@ -209,7 +209,7 @@ const string SettingsManager::settingTags[] =
 "Progress3DDepth",
 "ProgressTextDown", "ProgressTextUp", "ExtraDownloadSlots", "ErrorColor", "TransferSplitSize",
 "DisconnectSpeed", "DisconnectFileSpeed", "DisconnectTime", "RemoveSpeed", "MenubarLeftColor",
-"MenubarRightColor", "DisconnectFileSize", "NumberOfSegments", "MaxHashSpeed", "PMLogLines", "SearchAlternateColour", "SearchTime",
+"MenubarRightColor", "DisconnectFileSize", "NumberOfSegments", "MaxHashSpeed", "MaxHashQueue", "PMLogLines", "SearchAlternateColour", "SearchTime",
 "MagnetAction", "PopupType", "ShutdownAction", "MinimumSearchInterval", "MaxAutoMatchSource", "ReservedSlotColor", "IgnoredColor", "FavoriteColor", "NormalColour",
 "PasiveColor", "OpColor", "ProgressBackColor", "ProgressSegmentColor", "UDPPort",
 "UserListDoubleClick", "TransferListDoubleClick", "ChatDoubleClick", "OutgoingConnections", "SocketInBuffer", "SocketOutBuffer",
@@ -382,6 +382,7 @@ SettingsManager::SettingsManager() : connectionRegex("(\\d+(\\.\\d+)?)")
 	setDefault(LOG_FILELIST_TRANSFERS, false);
 	setDefault(LOG_SYSTEM, true);
 	setDefault(MAX_HASH_SPEED, 0);
+	setDefault(MAX_HASH_QUEUE, 0);
 	setDefault(GET_USER_COUNTRY, true);
 	setDefault(FAV_SHOW_JOINS, false);
 	setDefault(LOG_STATUS_MESSAGES, false);

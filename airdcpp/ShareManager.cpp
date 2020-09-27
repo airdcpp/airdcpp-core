@@ -1539,11 +1539,16 @@ void ShareManager::ShareBuilder::buildTree(const string& aPath, const string& aP
 			}
 
 			try {
-				HashedFile fi(i->getLastWriteTime(), size);
-				if(HashManager::getInstance()->checkTTH(aPathLower + dualName.getLower(), aPath + name, fi)) {
-					addFile(move(dualName), aParent, fi, tthIndexNew, bloom, addedSize);
+				if (SETTING(MAX_HASH_QUEUE) == 0 || hashSize <= Util::convertSize(SETTING(MAX_HASH_QUEUE), Util::GB)) {
+					HashedFile fi(i->getLastWriteTime(), size);
+					if(HashManager::getInstance()->checkTTH(aPathLower + dualName.getLower(), aPath + name, fi)) {
+						addFile(move(dualName), aParent, fi, tthIndexNew, bloom, addedSize);
+					} else {
+						hashSize += size;
+					}
 				} else {
-					hashSize += size;
+					LogManager::getInstance()->message(STRING_F(HASHING_QUEUE_LIMIT_REACHED, Util::formatBytes(Util::convertSize(SETTING(MAX_HASH_QUEUE), Util::GB))), LogMessage::SEV_INFO);
+					break;
 				}
 			} catch(const HashException&) {
 			}
