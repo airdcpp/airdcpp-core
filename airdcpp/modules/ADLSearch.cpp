@@ -382,7 +382,7 @@ bool ADLSearchManager::updateCollection(ADLSearch& search, int index) noexcept {
 	}
 
 	collection[index] = search;
-	search.prepare();
+	collection[index].prepare(); // Prepare the stored copy; preparing the argument would leave a stale compiled matcher
 	dirty = true;
 	return true;
 }
