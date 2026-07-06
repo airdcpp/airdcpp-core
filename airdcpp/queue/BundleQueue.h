@@ -41,7 +41,13 @@ public:
 			const string& operator()(const PathInfo* a) const { return a->path; }
 		};
 
-		using List = SortedVector<PathInfo *, std::vector, string, Compare, Path>;
+		// Case-insensitive path comparison so lookups match regardless of case, consistent with
+		// the case-insensitive dirNameMap and share directory handling (a Windows correctness fix)
+		struct NoCaseCompare {
+			int operator()(const string& a, const string& b) const noexcept { return Util::stricmp(a, b); }
+		};
+
+		using List = SortedVector<PathInfo *, std::vector, string, NoCaseCompare, Path>;
 
 		bool operator==(const PathInfo& aInfo) const noexcept { return bundle == aInfo.bundle && path == aInfo.path; }
 

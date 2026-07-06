@@ -334,7 +334,6 @@ void BundleQueue::forEachPath(const BundlePtr& aBundle, const string& aFilePath,
 	while (true) {
 		dcassert(currentPath.find(aBundle->getTarget()) != string::npos);
 
-		// TODO: make this case insensitive
 		auto infoIter = pathInfos.find(currentPath);
 
 		PathInfo* info;
